@@ -16,13 +16,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #201b49;
+  background: #0091ff;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #201b49;
+  background: #0091ff;
 }
 
 /* navbar styling */
@@ -36,7 +36,7 @@ nav {
 }
 
 nav.sticky {
-  background: #201b49;
+  background: #0091ff;
   padding: 13px 0;
 }
 
@@ -51,7 +51,7 @@ nav .navbar {
 nav .navbar .logo a {
   font-weight: 500;
   font-size: 35px;
-  color: #201b49;
+  color: #0091ff;
 }
 
 nav.sticky .navbar .logo a {
@@ -71,7 +71,7 @@ nav .navbar .menu li {
 .navbar .menu a {
   font-size: 18px;
   font-weight: 500;
-  color: #201b49;
+  color: #0091ff;
   padding: 6px 40px;
   transition: all 0.4s ease;
 }
@@ -89,7 +89,7 @@ nav.sticky .menu a:hover {
 }
 
 .navbar .media-icons a {
-  color: #201b49;
+  color: #0091ff;
   font-size: 18px;
   margin: 0 6px;
 }
@@ -162,7 +162,7 @@ nav.sticky .menu-btn {
 .home .text-three {
   font-size: 40px;
   margin: 5px 0;
-  color: #201b49;
+  color: #0091ff;
 }
 
 .home .text-four {
@@ -181,7 +181,7 @@ nav.sticky .menu-btn {
   border-radius: 6px;
   font-size: 25px;
   font-weight: 400;
-  background: #201b49;
+  background: #0091ff;
   color: #fff;
   cursor: pointer;
   border: 2px solid transparent;
@@ -189,9 +189,9 @@ nav.sticky .menu-btn {
 }
 
 .home .button button:hover {
-  border-color: #201b49;
+  border-color: #0091ff;
   background-color: #fff;
-  color: #201b49;
+  color: #0091ff;
 }
 
 /* About Section Styling */
@@ -233,7 +233,7 @@ section .title span::after {
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #201b49;
+  background: #0091ff;
   left: 0;
   bottom: 0;
 }
@@ -282,7 +282,7 @@ section .button button {
   border-radius: 4px;
   font-size: 25px;
   font-weight: 400;
-  background: #201b49;
+  background: #0091ff;
   color: #fff;
   border: 2px solid transparent;
   cursor: pointer;
@@ -290,9 +290,9 @@ section .button button {
 }
 
 section .button button:hover {
-  border-color: #201b49;
+  border-color: #0091ff;
   background-color: #fff;
-  color: #201b49;
+  color: #0091ff;
 }
 
 /* My Skills CSS */
@@ -354,12 +354,12 @@ section .button button:hover {
 
 .skills-details .boxes .topic {
   font-size: 20px;
-  color: #201b49;
+  color: #0091ff;
 }
 
 .skills-details .boxes .per {
   font-size: 60px;
-  color: #201b49;
+  color: #0091ff;
 }
 
 /* My Services CSS */
@@ -381,14 +381,14 @@ section .button button:hover {
 }
 
 .services .boxes .box:hover {
-  background: #201b49;
+  background: #0091ff;
   color: #fff;
 }
 
 .services .boxes .box .icon {
   height: 50px;
   width: 50px;
-  background: #201b49;
+  background: #0091ff;
   border-radius: 50%;
   text-align: center;
   line-height: 50px;
@@ -400,7 +400,7 @@ section .button button:hover {
 
 .boxes .box:hover .icon {
   background-color: #fff;
-  color: #201b49;
+  color: #0091ff;
 }
 
 .services .boxes .box:hover .topic,
@@ -432,7 +432,7 @@ section .button button:hover {
 
 /* Footer CSS */
 footer {
-  background: #201b49;
+  background: #0091ff;
   padding: 15px 0;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -459,7 +459,7 @@ footer .text span a:hover {
   bottom: 20px;
   right: 20px;
   color: #fff;
-  background: #201b49;
+  background: #0091ff;
   padding: 7px 12px;
   ;
   font-size: 18px;
@@ -536,7 +536,7 @@ footer .text span a:hover {
   }
 
   nav.sticky .menu a:hover {
-    color: #201b49;
+    color: #0091ff;
   }
 
   nav .navbar .media-icons {
@@ -594,7 +594,7 @@ footer .text span a:hover {
 
   .skills-details .boxes .per {
     font-size: 50px;
-    color: #201b49;
+    color: #0091ff;
   }
 }
 
@@ -632,7 +632,7 @@ footer .text span a:hover {
   border-radius: 6px;
   font-size: 25px;
   font-weight: 400;
-  background: #201b49;
+  background: #0091ff;
   color: #fff;
   cursor: pointer;
   border: 2px solid transparent;
@@ -640,9 +640,9 @@ footer .text span a:hover {
 }
 
 #button:hover {
-  border-color: #201b49;
+  border-color: #0091ff;
   background-color: #fff;
-  color: #201b49;
+  color: #0091ff;
 }
 
 #services {
