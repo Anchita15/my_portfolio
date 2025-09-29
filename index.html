@@ -5,405 +5,404 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Anchita Ramani — Portfolio</title>
   <meta name="description" content="Anchita Ramani — M.S. Computer Science. ML, CV, full-stack prototypes. Open to internships, co-ops, part-time & full-time. Authorized to work in the U.S. — no sponsorship required."/>
-  <script>
-    /* Keep Tailwind simple & consistent */
-    tailwind_config = { darkMode: 'class', theme: { extend: {} }, corePlugins: { preflight: true } }
-  </script>
+  <script>tailwind_config={darkMode:'class'};</script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{ --accent:#4f46e5; --accent-2:#ec4899; --muted:#64748b; }
-    html,body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; margin:0; background:linear-gradient(180deg,#ffffff,#f8fafc); color:#0b1220;}
-    .dark html,.dark body{background:linear-gradient(180deg,#040714,#041022); color:#e6eef8;}
-    :focus{outline:3px solid rgba(79,70,229,0.18); outline-offset:2px;}
+    /* ---------- Design tokens ---------- */
+    /* ---------- Design tokens (calmer cool palette) ---------- */
+    :root{
+      --bg:#ffffff; --bg-2:#f6f8fb;
+      --ink:#0b1220; --muted:#516072;
+      --card:#ffffff; --line:rgba(15,23,42,.08);
+      --brand:#2563eb;      /* calm blue */
+      --brand-2:#22c1c3;    /* blue-teal accent */
+      --radius:18px;
+    }
+    .dark:root, .dark :root{
+      --bg:#070c14; --bg-2:#0b1220;
+      --ink:#e8eef7; --muted:#cdd6e2;
+      --card:#0e1624; --line:rgba(255,255,255,.08);
+      --brand:#7aa7ff;      /* softer in dark */
+      --brand-2:#45d3d6;
+   }
 
-    /* Containers: laptop tidy, desktop wide */
-    .container-wide{max-width:1200px; margin-inline:auto; padding-inline:1rem;}
-    @media (min-width:1280px){ .container-wide{ max-width:1400px; } }
-    @media (min-width:1536px){ .container-wide{ max-width:1720px; } }
 
-    /* Header visuals */
-    header.site-header { background: rgba(255,255,255,0.9); }
-    .dark header.site-header { background: linear-gradient(180deg, rgba(6,8,15,0.95), rgba(8,12,20,0.95)); }
-    .avatar-ring{box-shadow:0 12px 30px rgba(2,6,23,0.06); border-radius:18px; overflow:hidden;}
+    html,body{
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:var(--ink); background:linear-gradient(180deg,var(--bg),var(--bg-2));
+      text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+    }
+    :focus{ outline:3px solid rgba(79,70,229,.25); outline-offset:3px; border-radius:10px; }
 
-    /* Simple UI atoms */
-    .nav-link{ color:#334155; text-decoration:none; } .dark .nav-link{ color:#cfe0ff; }
-    .nav-outline{ border:1px solid rgba(15,23,42,0.06); padding:.35rem .6rem; border-radius:.5rem; color:#334155; text-decoration:none;}
-    .dark .nav-outline{ border-color: rgba(255,255,255,0.06); color:#cfe0ff; }
-    .icon-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:.5rem; border:1px solid rgba(0,0,0,0.06); background:transparent; text-decoration:none; color:inherit; font-weight:500; }
-    .dark .icon-btn{ border-color: rgba(255,255,255,0.06); }
-    .nav-cta{ background: var(--accent); color:#fff; border-radius:.5rem; padding:.4rem .7rem; font-weight:600; text-decoration:none; }
-    .text-muted{ color:#475569; } .high-contrast{ color:#0b1220 } .dark .high-contrast{ color:#e6eef8 } .dark .text-muted{color: #e2e8f0; }
-    .badge { display:inline-flex; align-items:center; gap:.5rem; border-radius:999px; padding:.45rem .9rem; font-size:.92rem; font-weight:600; }
-    .badge-primary { background: var(--accent); color:#fff; }
-    .badge-secondary { background:#eef2ff; color:#0b1220; } .dark .badge-secondary{ background:#0f1724; color:#e6eef8; }
-    .tag { background:#eef2ff; color:#3730a3; padding:.25rem .6rem; border-radius:999px; font-size:.78rem; display:inline-block; }
-    .dark .tag{ background: rgba(79,70,229,0.25); color:#e0e7ff; }
+    /* Container rhythm */
+    .wrap{ max-width:1120px; margin-inline:auto; padding-inline:1.25rem; }
+    @media (min-width:1280px){ .wrap{ max-width:1280px; } }
+    @media (min-width:1536px){ .wrap{ max-width:1400px; } }
 
-    /* Cards & progress */
-    .card-hover{background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:18px; transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;}
-    .card-hover:hover{transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,.12);}
-    .dark .card-hover{ background: linear-gradient(180deg,#081122,#071127); border-color: rgba(255,255,255,0.06); }
-    .progress{height:10px; border-radius:999px; background:rgba(226,232,240,0.6); overflow:hidden;}
-    .progress > div{ height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); }
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:color-mix(in oklab, var(--bg), transparent 10%);
+      border-bottom:1px solid var(--line);
+    }
+    a.nav-link{ color:var(--muted); text-decoration:none; padding:.4rem .6rem; border-radius:8px; }
+    a.nav-link:hover{ color:var(--ink); background:color-mix(in oklab, var(--line), transparent 75%); }
+    .btn{ display:inline-flex; align-items:center; gap:.55rem; padding:.55rem .9rem; border-radius:10px; text-decoration:none; font-weight:600; }
+    .btn-ghost{ color:var(--ink); border:1px solid var(--line); }
+    .btn-ghost:hover{ background:rgba(79,70,229,.06); }
+    .btn-brand{ color:#fff; background:linear-gradient(90deg,var(--brand),var(--brand-2)); }
+    .btn-brand:hover{ filter:brightness(1.05); }
+    .icon-btn{ padding:.45rem .65rem; border-radius:10px; border:1px solid var(--line); color:var(--ink); text-decoration:none; }
+    .icon-btn:hover{ background:color-mix(in oklab, var(--line), transparent 70%); }
 
-    /* Toast */
-    .toast{position:fixed; right:1rem; bottom:1rem; z-index:60; min-width:180px; background:rgba(15,23,42,0.95); color:#fff; padding:.6rem .9rem; border-radius:.6rem; font-size:.9rem; box-shadow:0 12px 30px rgba(2,6,23,0.3); display:none;}
-    .dark .toast{ background:#111827 }
+    /* Sections */
+    section{ padding-block:56px; }
+    .section-head{ display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:18px; }
+    .eyebrow{ font-weight:700; letter-spacing:.05em; font-size:.8rem; color:var(--brand); text-transform:uppercase; }
+    .h1{ font-size:clamp(28px,3.2vw,42px); line-height:1.15; font-weight:800; }
+    .h2{ font-size:clamp(20px,2vw,28px); font-weight:700; }
+    .muted{ color:var(--muted); }
+
+    /* Cards */
+    .card{
+      background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+      transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s, border-color .28s;
+      box-shadow:0 4px 14px rgba(2,6,23,.04);
+    }
+    .card:hover{ transform:translateY(-6px); border-color:color-mix(in oklab,var(--brand), transparent 75%); box-shadow:0 16px 44px rgba(2,6,23,.14); }
+
+    /* Project thumb */
+    .thumb{ height:190px; border-radius:14px; overflow:hidden; background:color-mix(in oklab, var(--line), transparent 70%);
+      display:grid; place-items:center; color:#94a3b8; }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* Chips */
+    .chip{ font-size:.78rem; padding:.28rem .6rem; border-radius:999px; background:color-mix(in oklab, var(--brand), white 84%); color:#2e2a6a; }
+    .dark .chip{ background:color-mix(in oklab, var(--brand), black 70%); color:#e7ecff; }
+
+    /* Progress bars */
+    .bar{ height:10px; border-radius:999px; background:rgba(148,163,184,.25); overflow:hidden; }
+    .bar > i{ display:block; height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); }
 
     /* Modal */
-    .modal-backdrop{ background: rgba(2,6,23,0.72); backdrop-filter: blur(4px); }
-    .modal-card{ background:#fff; } .dark .modal-card{ background: linear-gradient(180deg,#071127,#071127); color:#e6eef8; }
+    .backdrop{ position:fixed; inset:0; backdrop-filter:blur(6px); background:rgba(2,6,23,.55); }
+    .modal{ background:var(--card); border:1px solid var(--line); border-radius:22px; max-width:720px; width:min(92vw,720px); box-shadow:0 24px 60px rgba(2,6,23,.35); }
 
-    /* Publications bib */
-    pre.bib{font-family:"Roboto Mono", ui-monospace, Menlo, Monaco, "Courier New", monospace; font-size:.9rem; padding:.6rem; border-radius:.5rem; overflow:auto; background:rgba(15,23,42,.04);}
-    .dark pre.bib{ background: rgba(255,255,255,.05); }
+    /* Inputs */
+    .field{ padding:.9rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink);}
+    .field::placeholder{ color:color-mix(in oklab, var(--muted), transparent 0%); }
+    .field:focus{ outline:2px solid color-mix(in oklab,var(--brand), transparent 70%); border-color:color-mix(in oklab,var(--brand), transparent 50%); }
 
-    /* ---------- Form field contrast tweaks (your request) ---------- */
-    input[type="text"], input[type="email"], input[type="url"], textarea{
-      color:#0f172a; caret-color:var(--accent); background:#ffffff; border-color:#cbd5e1;
-    }
-    input::placeholder, textarea::placeholder{ color:#64748b; opacity:1; }
-    .dark input[type="text"], .dark input[type="email"], .dark input[type="url"], .dark textarea{
-      color:#e6eef8; caret-color:#9fb3ff; background:#0b1220; border-color:#334155;
-    }
-    .dark input::placeholder, .dark textarea::placeholder{ color:#94a3b8; opacity:1; }
-    input:focus, textarea:focus{
-      outline: 2px solid rgba(79,70,229,0.35); outline-offset: 2px; border-color:#4f46e5; background:#ffffff;
-    }
-    .dark input:focus, .dark textarea:focus{
-      background:#0f1724; border-color:#818cf8; outline:2px solid rgba(129,140,248,.35);
-    }
+    /* Small helpers */
+    .divider{ height:1px; background:var(--line); margin-top:28px; }
+    .toast{ position:fixed; right:1rem; bottom:1rem; z-index:70; background:#0f172a; color:#fff; padding:.6rem .8rem; border-radius:10px; display:none; }
 
-    /* Ultra-wide spacing */
-    @media (min-width:1536px){ #projectsGrid{ gap:1.25rem } }
-
-    @media (prefers-reduced-motion: reduce){ .card-hover{transition:none!important; transform:none!important;} }
-
-    /* ===== VISIBILITY HOTFIX (place at end of <style>) ===== */
-
-/* Bump the theme variables so anything using var(--muted) brightens */
-:root { --muted: #475569; }          /* slate-600 (light) */
-.dark :root { --muted: #e2e8f0; }    /* slate-200 (dark) */
-
-/* Force higher-contrast muted text everywhere */
-.text-muted,
-#about .text-muted,
-#projects .text-muted,
-#publications .text-muted,
-#projectModal .text-muted {
-  color: var(--muted) !important;
-}
-
-/* Make skill chips readable in dark mode */
-.tag {
-  background: #eef2ff;
-  color: #3730a3;
-}
-.dark .tag {
-  background: rgba(79,70,229,0.28) !important;  /* indigo tint */
-  color: #e0e7ff !important;                    /* indigo-100 */
-  border-color: transparent !important;
-}
-
-/* Progress labels (often looked washed out) */
-#about .flex.justify-between.text-sm,
-#about .flex.justify-between.text-sm span {
-  color: var(--muted) !important;
-}
-
-/* Publication badges and DOI line */
-#publications .text-muted,
-#publications .inline-block.ml-2 {
-  color: var(--muted) !important;
-}
-
-/* Modal content */
-.modal-card,
-.modal-card .high-contrast { color: inherit !important; }
-.modal-card .text-muted { color: var(--muted) !important; }
-
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+    .reveal.show{ opacity:1; transform:none; }
   </style>
 </head>
-<body class="antialiased text-slate-900 dark:text-slate-100">
 
+<body class="dark:text-slate-100">
   <!-- Toast -->
-  <div id="toast" role="status" aria-live="polite" class="toast"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <!-- Header -->
-  <header class="site-header sticky top-0 z-50 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800">
-    <div class="container-wide flex items-center justify-between py-3">
-      <a href="#" class="flex items-center gap-3" aria-label="Home">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-400 text-white grid place-items-center font-semibold avatar-ring">AR</div>
+  <header class="site-header">
+    <div class="wrap py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-500 text-white grid place-items-center font-semibold">AR</div>
         <div>
-          <div class="text-sm font-semibold high-contrast">Anchita Ramani</div>
-          <div class="text-xs text-muted">M.S. Computer Science • NC State</div>
+          <div class="text-sm font-semibold">Anchita Ramani</div>
+          <div class="text-xs muted">M.S. Computer Science • NC State</div>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-3 text-sm">
+      <nav class="hidden md:flex items-center gap-2 text-sm">
         <a class="nav-link" href="#projects">Projects</a>
         <a class="nav-link" href="#about">About</a>
         <a class="nav-link" href="#publications">Publications</a>
-        <a class="nav-outline" href="#contact" aria-label="Contact">Contact</a>
+        <a class="btn btn-ghost" href="#contact">Contact</a>
 
         <a class="icon-btn" href="https://github.com/Anchita15" target="_blank" rel="noopener">GitHub</a>
         <a class="icon-btn" href="https://www.linkedin.com/in/aramani2/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="nav-cta" href="https://drive.google.com/file/d/14oZ4xB1wSsYRmNQSREH5mf0Nj9O-m4J6/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+        <a class="btn btn-brand" href="https://drive.google.com/file/d/1C67B7hhU9RMs0gxBVJ3WanHW84NlBllr/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
 
-        <button id="themeBtn" aria-label="Toggle theme" class="ml-1 p-2 rounded-md border border-slate-200 dark:border-slate-700">
-          <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">
+          <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
         </button>
       </nav>
 
-      <!-- Mobile -->
-      <div class="md:hidden flex items-center gap-2">
-        <button id="themeBtnMobile" aria-label="Toggle theme" class="p-2 rounded-md border border-slate-200 dark:border-slate-700">
-          <svg id="themeIconMobile" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
-        </button>
-        <button id="mobileToggle" aria-label="Open menu" class="px-3 py-1 border rounded-md">Menu</button>
-      </div>
+      <button id="mobileToggle" class="md:hidden icon-btn" aria-label="Menu">Menu</button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobilePanel" class="hidden md:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-[rgba(6,8,15,0.95)]">
-      <div class="px-4 py-3 space-y-2">
-        <a class="block text-muted" href="#projects">Projects</a>
-        <a class="block text-muted" href="#about">About</a>
-        <a class="block text-muted" href="#publications">Publications</a>
-        <a class="block text-muted" href="#contact">Contact</a>
-        <div class="flex gap-2 pt-2">
-          <a class="icon-btn" href="https://github.com/Anchita15" target="_blank" rel="noopener">GitHub</a>
-          <a class="icon-btn" href="https://www.linkedin.com/in/aramani2/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="nav-cta" href="https://drive.google.com/file/d/1C67B7hhU9RMs0gxBVJ3WanHW84NlBllr/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+    <!-- Mobile panel -->
+    <div id="mobilePanel" class="wrap hidden pb-4">
+      <div class="flex flex-col gap-2 text-sm">
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#publications">Publications</a>
+        <a class="btn btn-ghost w-max" href="#contact">Contact</a>
+        <div class="flex gap-2 pt-1">
+          <a class="icon-btn" href="https://github.com/Anchita15" target="_blank">GitHub</a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/aramani2/" target="_blank">LinkedIn</a>
+          <a class="btn btn-brand" href="https://drive.google.com/file/d/1C67B7hhU9RMs0gxBVJ3WanHW84NlBllr/view?usp=sharing" target="_blank">Resume</a>
         </div>
       </div>
     </div>
   </header>
 
   <!-- Main -->
-  <main class="container-wide py-12 relative overflow-x-hidden">
-    <!-- Hero -->
-    <section class="grid md:grid-cols-2 xl:grid-cols-[1.2fr,1fr] gap-8 items-center">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight high-contrast">
-          Hi — I’m <span class="text-indigo-600 dark:text-indigo-300">Anchita</span>. I build ML systems & web apps.
-        </h1>
-        <p class="mt-4 text-lg text-muted">
-          Practical ML & CV: medical imaging, anomaly detection, and deployable prototypes with clean UX.
-        </p>
+  <main>
+    <!-- HERO -->
+    <section class="wrap pt-16">
+      <div class="grid md:grid-cols-[1.2fr,1fr] gap-10 items-start">
+        <div class="reveal">
+          <p class="eyebrow">Machine Learning • Web Systems</p>
+          <h1 class="h1 mt-2">Hi, I’m <span class="text-indigo-600 dark:text-indigo-300">Anchita</span> — I build practical ML systems and clean web apps.</h1>
+          <p class="muted mt-4 text-lg">Focus areas: medical imaging, anomaly detection, and deployable prototypes with thoughtful UX.</p>
 
-        <div class="mt-4 flex flex-wrap gap-3 items-center">
-          <span class="badge badge-primary">Open to internships · co-ops · part-time · full-time</span>
-          <span class="badge badge-secondary">Authorized to work in the U.S. — no sponsorship required</span>
-        </div>
-
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a class="inline-flex items-center px-4 py-2 rounded-md bg-indigo-600 text-white" href="#projects">View projects</a>
-          <a class="inline-flex items-center px-4 py-2 rounded-md border text-muted" href="#contact">Get in touch</a>
-          <a class="inline-flex items-center px-4 py-2 rounded-md border text-muted" href="mailto:anchitaram@gmail.com">Email</a>
-        </div>
-
-        <div class="mt-6 text-sm text-muted">Based in Raleigh, NC • willing to relocate / remote friendly</div>
-      </div>
-
-      <div class="flex justify-center md:justify-end">
-        <div id="heroAvatar" class="w-60 h-60 avatar-ring bg-slate-100 dark:bg-slate-900/40 rounded-2xl overflow-hidden transform-gpu transition-transform duration-400 hover:scale-[1.02]">
-          <img src="WhatsApp%20Image%202023-08-26%20at%207.19.00%20PM.jpeg" alt="Anchita Ramani" class="object-cover w-full h-full" loading="lazy"/>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="mt-12">
-      <div class="flex items-baseline justify-between">
-        <h2 class="text-2xl font-semibold high-contrast">Selected projects</h2>
-        <p class="text-sm text-muted">Click a card to view code / demo.</p>
-      </div>
-      <div id="projectsGrid" class="mt-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"></div>
-    </section>
-
-    <!-- About & Skills -->
-    <section id="about" class="mt-12 grid md:grid-cols-2 gap-8">
-      <div>
-        <h2 class="text-2xl font-semibold high-contrast">About me</h2>
-        <p class="mt-3 text-muted">
-          I build end-to-end ML systems — from data ingestion and modeling to production-ready deployment.
-          I enjoy working on medical imaging, anomaly detection, and shipping reproducible prototypes.
-        </p>
-        <ul class="mt-4 text-sm space-y-1 text-muted">
-          <li>• Master’s in Computer Science — NC State (expected May 2026)</li>
-          <li>• Research: medical imaging & anomaly detection</li>
-          <li>• Deployment: Streamlit, FastAPI/Flask, Docker, CI/CD</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-lg font-medium high-contrast">Skills</h3>
-        <div class="mt-3 flex flex-wrap gap-2">
-          <span class="tag">SQL</span><span class="tag">Python</span><span class="tag">JavaScript</span>
-          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Google Cloud</span>
-          <span class="tag">Git</span><span class="tag">TensorFlow</span><span class="tag">CI/CD</span>
-          <span class="tag">PyTorch</span><span class="tag">Docker</span>
-        </div>
-
-        <div class="mt-6 space-y-4">
-          <div>
-            <div class="flex justify-between text-sm text-muted"><span>Python</span><span>90%</span></div>
-            <div class="progress mt-2"><div style="width:90%"></div></div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <span class="btn btn-brand">Open to internships · co-ops · part-time · full-time</span>
+            <span class="btn btn-ghost">Authorized in the U.S. — no sponsorship required</span>
           </div>
-          <div>
-            <div class="flex justify-between text-sm text-muted"><span>SQL</span><span>85%</span></div>
-            <div class="progress mt-2"><div style="width:85%"></div></div>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a class="btn btn-brand" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+            <a class="btn btn-ghost" href="mailto:anchitaram@gmail.com">Email</a>
           </div>
-          <div>
-            <div class="flex justify-between text-sm text-muted"><span>TensorFlow / PyTorch</span><span>80%</span></div>
-            <div class="progress mt-2"><div style="width:80%"></div></div>
+
+          <div class="muted mt-4 text-sm">Based in Raleigh, NC • open to relocate • remote friendly</div>
+        </div>
+
+        <div class="reveal">
+          <div id="heroAvatar" class="rounded-2xl overflow-hidden border" style="border-color:var(--line)">
+            <img src="WhatsApp%20Image%202023-08-26%20at%207.19.00%20PM.jpeg" alt="Anchita Ramani" class="block w-full h-full object-cover">
           </div>
         </div>
       </div>
+      <div class="wrap divider"></div>
     </section>
 
-    <!-- Publications -->
-    <section id="publications" class="mt-12 max-w-4xl">
-      <h2 class="text-2xl font-semibold high-contrast">Publications</h2>
-      <p class="mt-2 text-muted">Selected peer-reviewed publications.</p>
-      <div id="publicationsList" class="mt-6 space-y-4"></div>
+    <!-- PROJECTS -->
+    <section id="projects" class="wrap">
+      <div class="section-head">
+        <h2 class="h2">Selected projects</h2>
+        <p class="muted text-sm">Click a card for the live app and repo.</p>
+      </div>
+
+      <div id="projectsGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- cards via JS -->
+      </div>
+      <div class="divider"></div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="mt-12 max-w-3xl">
-      <h2 class="text-2xl font-semibold high-contrast">Contact</h2>
-      <p class="mt-2 text-muted">Interested in working together? Send a quick message — I typically reply within a few business days.</p>
+    <!-- ABOUT -->
+    <section id="about" class="wrap">
+      <div class="section-head">
+        <h2 class="h2">About & skills</h2>
+      </div>
 
-      <form id="contactForm" class="mt-6 grid gap-3" novalidate>
-        <label class="sr-only" for="name">Name</label>
-        <input id="name" name="name" required placeholder="Your name"
-               class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"/>
-
-        <label class="sr-only" for="email">Email</label>
-        <input id="email" name="email" required type="email" placeholder="you@example.com"
-               class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"/>
-
-        <label class="sr-only" for="message">Message</label>
-        <textarea id="message" name="message" required rows="5" placeholder="Short message"
-                  class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"></textarea>
-
-        <div class="flex gap-3 items-center">
-          <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-indigo-600 text-white">Send</button>
-          <a href="mailto:anchitaram@gmail.com" class="px-4 py-2 rounded-md border text-muted">Email</a>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="reveal">
+          <p class="muted">I build end-to-end ML systems — from data and modeling to deployable services and UIs. I like clean, reproducible work that’s easy to evaluate and iterate.</p>
+          <ul class="muted mt-4 space-y-1 text-sm">
+            <li>• M.S. Computer Science — NC State (expected May 2026)</li>
+            <li>• Research: medical imaging & anomaly detection</li>
+            <li>• Deployment: Streamlit, FastAPI/Flask, Docker, CI/CD</li>
+          </ul>
         </div>
 
-        <div id="contactNote" class="text-sm mt-1 text-muted">
-          Your message will be sent via Formspree to <b>anchitaram@gmail.com</b>.
+        <div class="reveal">
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">TensorFlow</span>
+            <span class="chip">PyTorch</span><span class="chip">Google Cloud</span><span class="chip">Docker</span>
+            <span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span>
+            <span class="chip">Git</span><span class="chip">CI/CD</span>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            <div>
+              <div class="flex justify-between muted text-sm"><span>Python</span><span>90%</span></div>
+              <div class="bar mt-2"><i style="width:90%"></i></div>
+            </div>
+            <div>
+              <div class="flex justify-between muted text-sm"><span>SQL</span><span>85%</span></div>
+              <div class="bar mt-2"><i style="width:85%"></i></div>
+            </div>
+            <div>
+              <div class="flex justify-between muted text-sm"><span>TensorFlow / PyTorch</span><span>80%</span></div>
+              <div class="bar mt-2"><i style="width:80%"></i></div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="wrap">
+      <div class="section-head">
+        <h2 class="h2">Publications</h2>
+      </div>
+
+      <div id="publicationsList" class="grid gap-6 md:grid-cols-2">
+        <!-- via JS -->
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="wrap">
+      <div class="section-head">
+        <h2 class="h2">Contact</h2>
+        <p class="muted text-sm">Prefer email? <a class="underline" href="mailto:anchitaram@gmail.com">anchitaram@gmail.com</a></p>
+      </div>
+
+      <form id="contactForm" class="grid gap-3 max-w-xl" novalidate>
+        <input id="name" name="name" class="field" placeholder="Your name" required>
+        <input id="email" name="email" class="field" type="email" placeholder="you@example.com" required>
+        <textarea id="message" name="message" class="field" rows="5" placeholder="Short message" required></textarea>
+        <div class="flex items-center gap-3">
+          <button id="submitBtn" type="submit" class="btn btn-brand">Send</button>
+          <a class="btn btn-ghost" href="mailto:anchitaram@gmail.com">Email</a>
+        </div>
+        <div id="contactNote" class="muted text-sm">Messages go to <b>anchitaram@gmail.com</b> via Formspree.</div>
       </form>
-    </section>
 
-    <footer class="mt-12 border-t border-slate-100 dark:border-slate-800 pt-6 text-sm text-muted">
-      © <span id="year"></span> Anchita Ramani — Built with care.
-    </footer>
+      <footer class="muted text-sm mt-12 py-6 border-t" style="border-color:var(--line)">
+        © <span id="year"></span> Anchita Ramani — Built with care.
+      </footer>
+    </section>
   </main>
 
   <!-- Project modal -->
-  <div id="projectModal" class="fixed inset-0 hidden items-center justify-center z-50" aria-hidden="true" role="dialog" aria-modal="true">
-    <div id="modalBackdrop" class="modal-backdrop absolute inset-0"></div>
-    <div class="relative max-w-3xl w-full mx-4 bg-white dark:bg-[#071127] rounded-2xl shadow-xl overflow-hidden modal-card">
-      <div class="p-6">
-        <button id="modalClose" class="absolute right-4 top-4 p-2 rounded-md border border-slate-200 dark:border-slate-700 high-contrast" aria-label="Close project (Esc)">&times;</button>
-        <h3 id="modalTitle" class="text-xl font-semibold high-contrast"></h3>
-        <p id="modalDesc" class="mt-3 text-muted"></p>
-        <div id="modalTech" class="mt-4 flex flex-wrap gap-2"></div>
-        <div class="mt-6 flex gap-3">
-          <a id="modalDemo" class="inline-block px-4 py-2 rounded-md border text-muted" target="_blank" rel="noopener">View demo</a>
-          <a id="modalCode" class="inline-block px-4 py-2 rounded-md bg-indigo-600 text-white" target="_blank" rel="noopener">Code</a>
+  <div id="projectModal" class="hidden">
+    <div class="backdrop flex items-center justify-center p-4">
+      <div class="modal p-6 relative">
+        <button id="modalClose" class="icon-btn absolute right-4 top-4" aria-label="Close">✕</button>
+        <h3 id="modalTitle" class="text-xl font-semibold"></h3>
+        <p id="modalDesc" class="muted mt-2"></p>
+        <div id="modalTech" class="mt-3 flex flex-wrap gap-2"></div>
+        <div class="mt-5 flex gap-2">
+          <a id="modalApp" class="btn btn-ghost" target="_blank" rel="noopener">Open App</a>
+          <a id="modalRepo" class="btn btn-brand" target="_blank" rel="noopener">Repo</a>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    /* ===== Utilities ===== */
+    /* Utilities */
     const $=(s,el=document)=>el.querySelector(s); const $$=(s,el=document)=>[...el.querySelectorAll(s)];
-    const toastEl = $('#toast'); const showToast=(m,t=2500)=>{ if(!toastEl) return; toastEl.textContent=m; toastEl.style.display='block'; clearTimeout(toastEl._t); toastEl._t=setTimeout(()=>toastEl.style.display='none',t); };
+    const toast=$('#toast'); const showToast=(m)=>{ toast.textContent=m; toast.style.display='block'; clearTimeout(toast._t); toast._t=setTimeout(()=>toast.style.display='none',2200); };
 
-    /* Theme */
-    const THEME_KEY='site-theme', htmlEl=document.documentElement;
-    const icon=$('#themeIcon'), iconM=$('#themeIconMobile');
-    const sunSVG='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1M12 20v1M4.2 4.2l.7.7M18.1 18.1l.7.7M1 12h1M22 12h1M4.2 19.8l.7-.7M18.1 5.9l.7-.7M12 7a5 5 0 100 10 5 5 0 000-10z"/>';
-    const moonSVG='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
-    function setTheme(mode){ htmlEl.classList.toggle('dark', mode==='dark'); if(icon) icon.innerHTML=mode==='dark'?sunSVG:moonSVG; if(iconM) iconM.innerHTML=mode==='dark'?sunSVG:moonSVG; }
-    (function initTheme(){ const saved=localStorage.getItem(THEME_KEY); if(saved==='light'||saved==='dark'){ setTheme(saved); } else { setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }})();
-    function toggleTheme(){ const dark=htmlEl.classList.contains('dark'); const next=dark?'light':'dark'; localStorage.setItem(THEME_KEY,next); setTheme(next); showToast(`Switched to ${next} mode`);}
-    $('#themeBtn')?.addEventListener('click', toggleTheme); $('#themeBtnMobile')?.addEventListener('click', toggleTheme);
+    /* Theme toggle */
+    const htmlEl=document.documentElement; const KEY='site-theme';
+    const moon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>';
+    const sun='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1M4.2 4.2l.7.7M18.1 18.1l.7.7M1 12h1m20 0h1M4.2 19.8l.7-.7M18.1 5.9l.7-.7M12 7a5 5 0 100 10 5 5 0 000-10z"/>';
+    function setTheme(mode){ htmlEl.classList.toggle('dark', mode==='dark'); $('#themeIcon').innerHTML= mode==='dark'? sun : moon; }
+    (function(){ const saved=localStorage.getItem(KEY); if(saved){ setTheme(saved); } else { setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }})();
+    $('#themeBtn')?.addEventListener('click',()=>{ const next=htmlEl.classList.contains('dark')?'light':'dark'; localStorage.setItem(KEY,next); setTheme(next); });
 
     /* Mobile menu */
-    $('#mobileToggle')?.addEventListener('click', ()=> $('#mobilePanel').classList.toggle('hidden'));
+    $('#mobileToggle')?.addEventListener('click',()=> $('#mobilePanel').classList.toggle('hidden'));
 
-    /* Hero parallax (subtle) */
-    (function heroParallax(){
-      const avatar = $('#heroAvatar'); if(!avatar) return;
-      let range = 9;
-      function handle(e){
-        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const r = avatar.getBoundingClientRect(); const cx=r.left+r.width/2; const dx=(e.clientX-cx)/r.width;
-        avatar.style.transform = `translate3d(${dx*range}px, ${dx*0.2}px, 0) rotate(${dx*1.6}deg)`;
-      }
-      window.addEventListener('mousemove', handle);
-      window.addEventListener('mouseleave', ()=> avatar.style.transform='');
-    })();
+    /* Scroll reveal */
+    const io=new IntersectionObserver((es)=> es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }), {threshold:.12});
+    $$('.reveal').forEach(n=>io.observe(n));
 
-    /* Projects (your 3) */
+    /* Projects — app-first design */
     const projects=[
-      { id:'proj-hpp', title:'House Price Prediction System', desc:'Regression pipeline with feature engineering, XGBoost baseline, and a Streamlit UI for interactive predictions.', tech:['Python','Pandas','XGBoost','Streamlit','CI/CD'], img:'assets/Capture.png', demo:'https://housepricepredictionmlpp-jkpeappl7mkxhhkq4hnyxyf.streamlit.app/', code:'https://github.com/Anchita15/house_price_prediction_ML_pp' },
-      { id:'proj-pneumo', title:'Pneumonia Detection System', desc:'PneumonXNet — CNN for chest X-rays with preprocessing, eval dashboard, and inference API.', tech:['TensorFlow','Keras','OpenCV','Python','Docker'], img:'', demo:'#', code:'https://github.com/Anchita15' },
-      { id:'proj-anomaly', title:'Anomaly Detection System', desc:'Unsupervised anomalies with autoencoders & Isolation Forest; real-time scoring via FastAPI.', tech:['PyTorch','scikit-learn','FastAPI','Python','Docker'], img:'', demo:'#', code:'https://github.com/Anchita15' }
+      {
+        id:'proj-hpp',
+        title:'House Price Prediction System',
+        desc:'Regression pipeline with feature engineering, XGBoost baseline, and a Streamlit UI for interactive predictions.',
+        tech:['Python','Pandas','XGBoost','Streamlit','CI/CD'],
+        img:'assets/Capture.png',
+        app:'https://housepricepredictionmlpp-jkpeappl7mkxhhkq4hnyxyf.streamlit.app/',
+        repo:'https://github.com/Anchita15/house_price_prediction_ML_pp'
+      },
+     {
+       id:'proj-pos',
+       title:'Retail POS Assistant',
+       desc:'Streamlit + LangChain app: inventory lookup, ticketing, and store operations assistant using RAG and LLMs.',
+       tech:['Streamlit','LangChain','Chroma','LLM','Python'],
+       img:'assets/pos.png',  // add a screenshot and commit that with this name
+       app:'https://your-pos-app-url.streamlit.app',  // once you deploy this
+       repo:'https://github.com/Anchita15/retail-pos-assistant'
+     },
+     {
+      id:'proj-ankipizza',
+      title:'AnkiPizza',
+      desc:'A lightweight app for fast pizza ordering & task flow demos; built for clean UX and quick interactions.',
+      tech:['JavaScript','HTML','CSS'],
+      img:'assets/Capture2.png',       // add a screenshot named exactly like this
+      app:'#',                          // if/when you deploy it, paste the URL here
+      repo:'https://github.com/Anchita15/AnkiPizza'
+    }
     ];
+
     const grid=$('#projectsGrid');
     function card(p){
-      const a=document.createElement('article'); a.className='card-hover p-4 border border-slate-100 dark:border-slate-800';
-      a.innerHTML=`
-        <div class="h-40 rounded-md bg-slate-50 dark:bg-slate-900/40 grid place-items-center text-slate-400 dark:text-slate-300 overflow-hidden">
-          ${p.img?`<img src="${p.img}" alt="${p.title} screenshot" class="object-cover w-full h-full" loading="lazy">`:'<span class="text-sm text-muted">Screenshot</span>'}
-        </div>
-        <h3 class="mt-3 font-semibold high-contrast">${p.title}</h3>
-        <p class="mt-2 text-sm text-muted">${p.desc}</p>
-        <div class="mt-3 flex flex-wrap gap-2">${p.tech.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      const el=document.createElement('article'); el.className='card p-4 reveal';
+      el.innerHTML=`
+        <div class="thumb">${p.img? `<img src="${p.img}" alt="${p.title}">` : '<span class="muted text-sm">Screenshot</span>'}</div>
+        <h3 class="mt-3 font-semibold">${p.title}</h3>
+        <p class="muted mt-2 text-sm">${p.desc}</p>
+        <div class="mt-3 flex flex-wrap gap-2">${p.tech.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
         <div class="mt-4 flex gap-2">
-          <button class="px-3 py-1 border rounded-md" data-view="${p.id}">View</button>
-          <a class="px-3 py-1 rounded-md bg-indigo-600 text-white" href="${p.code}" target="_blank" rel="noopener">Code</a>
+          <a class="btn btn-ghost" href="${p.app||'#'}" target="_blank" rel="noopener">Open App</a>
+          ${p.repo?`<a class="btn btn-brand" href="${p.repo}" target="_blank" rel="noopener">Repo</a>`:''}
         </div>`;
-      a.querySelector('[data-view]')?.addEventListener('click', ()=>openProjectModal(p.id));
-      a.tabIndex=0; a.setAttribute('role','button');
-      a.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openProjectModal(p.id);} });
-      return a;
+      el.addEventListener('click',(e)=>{ const tag=e.target.tagName.toLowerCase(); if(tag==='a'||e.target.closest('a')) return; openProjectModal(p.id); });
+      return el;
     }
-    function render(){ if(!grid) return; grid.innerHTML=''; projects.forEach(p=>grid.appendChild(card(p))); }
-    render();
+    function renderProjects(){ grid.innerHTML=''; projects.forEach(p=>grid.appendChild(card(p))); $$('.reveal',grid).forEach(n=>io.observe(n)); }
+    renderProjects();
 
     /* Modal */
-    const modal=$('#projectModal'), mTitle=$('#modalTitle'), mDesc=$('#modalDesc'), mTech=$('#modalTech'), mDemo=$('#modalDemo'), mCode=$('#modalCode');
-    function openProjectModal(id){ const p=projects.find(x=>x.id===id); if(!p) return;
-      mTitle.textContent=p.title; mDesc.textContent=p.desc; mTech.innerHTML=p.tech.map(t=>`<span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-sm mr-1">${t}</span>`).join('');
-      mDemo.href=p.demo||'#'; mCode.href=p.code||'#'; modal.style.display='flex'; modal.removeAttribute('aria-hidden'); document.body.style.overflow='hidden';
+    const modal=$('#projectModal'); const mTitle=$('#modalTitle'), mDesc=$('#modalDesc'), mTech=$('#modalTech'), mApp=$('#modalApp'), mRepo=$('#modalRepo');
+    function openProjectModal(id){
+      const p=projects.find(x=>x.id===id); if(!p) return;
+      mTitle.textContent=p.title; mDesc.textContent=p.desc;
+      mTech.innerHTML=p.tech.map(t=>`<span class="chip">${t}</span>`).join('');
+      mApp.href=p.app||'#'; mRepo.href=p.repo||'#';
+      modal.classList.remove('hidden'); document.body.style.overflow='hidden';
     }
-    function closeProjectModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    $('#modalClose')?.addEventListener('click', closeProjectModal); $('#modalBackdrop')?.addEventListener('click', closeProjectModal);
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.style.display==='flex') closeProjectModal(); });
+    function closeProjectModal(){ modal.classList.add('hidden'); document.body.style.overflow=''; }
+    $('#modalClose')?.addEventListener('click', closeProjectModal);
+    modal?.addEventListener('click', (e)=>{ if(e.target.classList.contains('backdrop')) closeProjectModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !modal.classList.contains('hidden')) closeProjectModal(); });
 
-    /* Publications */
+    /* Publications — cleaner card look */
     const publications=[
-      { id:'pub1', title:'PneumonXNet - A Deep Learning Model for Pneumonia Detection', authors:'Harshit Aditya, Anchita Ramani, Nilesh Kumar, Kasturi Singh, Vandana Bhattacharjee', venue:'SPARC 2024 · IEEE', doi:'10.1109/SPARC61891.2024.10829021', bib:`@inproceedings{aditya2024pneumonxnet,
+      {
+        id:'pub1',
+        title:'PneumonXNet - A Deep Learning Model for Pneumonia Detection',
+        authors:'Harshit Aditya, Anchita Ramani, Nilesh Kumar, Kasturi Singh, Vandana Bhattacharjee',
+        venue:'SPARC 2024 · IEEE',
+        doi:'10.1109/SPARC61891.2024.10829021',
+        bib:`@inproceedings{aditya2024pneumonxnet,
   title={PneumonXNet - A Deep Learning Model for Pneumonia Detection},
   author={Aditya, Harshit and Ramani, Anchita and Kumar, Nilesh and Singh, Kasturi and Bhattacharjee, Vandana},
   booktitle={2024 International Conference on Signal Processing and Advance Research in Computing (SPARC)},
   year={2024},
   publisher={IEEE},
   doi={10.1109/SPARC61891.2024.10829021}
-}` },
-      { id:'pub2', title:'DDConvNet: A Deep Learning Approach for Driver Drowsiness Detection', authors:'Nilesh Kumar, Kasturi Singh, Anchita Ramani, Harshit Aditya, Vandana Bhattacharjee, Sayantani Roy', venue:'AIP Conf. Proc. 2025', doi:'10.1063/5.0248451', bib:`@article{kumar2025ddconvnet,
+}`
+      },
+      {
+        id:'pub2',
+        title:'DDConvNet: A Deep Learning Approach for Driver Drowsiness Detection',
+        authors:'Nilesh Kumar, Kasturi Singh, Anchita Ramani, Harshit Aditya, Vandana Bhattacharjee, Sayantani Roy',
+        venue:'AIP Conf. Proc. 2025',
+        doi:'10.1063/5.0248451',
+        bib:`@article{kumar2025ddconvnet,
   title={DDConvNet: A Deep Learning Approach for Driver Drowsiness Detection},
   author={Kumar, Nilesh and Singh, Kasturi and Ramani, Anchita and Aditya, Harshit and Bhattacharjee, Vandana and Roy, Sayantani},
   journal={AIP Conference Proceedings},
@@ -411,53 +410,57 @@
   pages={030025},
   year={2025},
   doi={10.1063/5.0248451}
-}` }
+}`
+      }
     ];
     const pubList=$('#publicationsList');
     const esc=(s)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-    function pubCard(p){ const el=document.createElement('article'); el.className='card-hover p-4 border border-slate-100 dark:border-slate-800';
-      el.innerHTML=`<h3 class="font-semibold high-contrast">${p.title}</h3>
-      <p class="mt-1 text-sm text-muted">${p.authors} <span class="inline-block ml-2 text-xs px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-200">${p.venue}</span></p>
-      <p class="mt-2 text-sm text-muted">DOI: <a class="text-indigo-600 dark:text-indigo-300 underline" href="https://doi.org/${p.doi}" target="_blank" rel="noopener">${p.doi}</a></p>
-      <div class="mt-3">
-        <div class="flex items-center gap-2">
-          <button class="copy-bib px-3 py-1 rounded-md border text-sm" data-id="${p.id}">Copy BibTeX</button>
-          <button class="toggle-bib px-3 py-1 rounded-md border text-sm" data-id="${p.id}" aria-expanded="false">Show BibTeX</button>
-          <span id="copied-${p.id}" class="ml-2 text-sm text-green-600 dark:text-green-200 hidden">Copied ✓</span>
+    function pubCard(p){
+      const el=document.createElement('article'); el.className='card p-4 reveal';
+      el.innerHTML = `
+        <h3 class="font-semibold">${p.title}</h3>
+        <p class="muted text-sm mt-1">${p.authors}</p>
+        <p class="muted text-sm mt-1"><span class="chip" style="background:transparent;border:1px solid var(--line)">${p.venue}</span></p>
+        <p class="muted text-sm mt-2">DOI: <a class="underline" href="https://doi.org/${p.doi}" target="_blank" rel="noopener">${p.doi}</a></p>
+        <div class="mt-3 flex gap-2">
+          <button class="btn btn-ghost" data-copy="${p.id}">Copy BibTeX</button>
+          <button class="btn btn-ghost" data-toggle="${p.id}" aria-expanded="false">Show BibTeX</button>
         </div>
-        <div id="bib-${p.id}" class="mt-3 hidden"><pre class="bib">${esc(p.bib)}</pre></div>
-      </div>`;
-      el.querySelector('.copy-bib').addEventListener('click',()=>copyBib(p.id));
-      el.querySelector('.toggle-bib').addEventListener('click',(e)=>toggleBib(p.id,e.currentTarget));
+        <div id="bib-${p.id}" class="hidden mt-3"><pre style="font: .9rem/1.4 'Roboto Mono', ui-monospace; background:rgba(148,163,184,.1); padding:.7rem; border-radius:10px; border:1px solid var(--line); overflow:auto;">${esc(p.bib)}</pre></div>`;
+      el.querySelector('[data-copy]')?.addEventListener('click', async()=>{ await navigator.clipboard.writeText(p.bib); showToast('BibTeX copied'); });
+      el.querySelector('[data-toggle]')?.addEventListener('click',(e)=>{ const b=$(`#bib-${p.id}`); const open=b.classList.contains('hidden'); b.classList.toggle('hidden', !open); e.currentTarget.setAttribute('aria-expanded', String(open)); e.currentTarget.textContent=open?'Hide BibTeX':'Show BibTeX'; });
       return el;
     }
-    function renderPubs(){ if(!pubList) return; pubList.innerHTML=''; publications.forEach(p=>pubList.appendChild(pubCard(p))); }
+    function renderPubs(){ pubList.innerHTML=''; publications.forEach(p=>pubList.appendChild(pubCard(p))); $$('.reveal',pubList).forEach(n=>io.observe(n)); }
     renderPubs();
-    async function copyBib(id){ const p=publications.find(x=>x.id===id); if(!p) return; try{ await navigator.clipboard.writeText(p.bib); const el=$(`#copied-${id}`); el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),1600); showToast('BibTeX copied'); } catch { showToast('Copy failed — select manually'); } }
-    function toggleBib(id,btn){ const blk=$(`#bib-${id}`); const show=blk.classList.contains('hidden'); blk.classList.toggle('hidden',!show); btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide BibTeX':'Show BibTeX'; }
 
-    /* Contact (Formspree) — your real endpoint */
+    /* Contact — resilient */
     const contactForm=$('#contactForm'), submitBtn=$('#submitBtn'), note=$('#contactNote');
-    function setNote(m,k='info'){ if(!note) return; note.textContent=m; note.style.color = k==='error' ? '#f87171' : k==='success' ? '#22c55e' : ''; }
+    function setNote(m,kind='info'){ note.textContent=m; note.style.color= kind==='error'?'#ef4444': kind==='success'?'#16a34a':''; }
     async function handleContactSubmit(e){
       e.preventDefault();
       const name=$('#name').value.trim(), email=$('#email').value.trim(), message=$('#message').value.trim();
       if(!name||!email||!message){ setNote('Please fill all fields.','error'); showToast('Please fill all fields.'); return; }
-      submitBtn.disabled=true; submitBtn.style.opacity='.7';
+      submitBtn.disabled=true; submitBtn.classList.add('opacity-80');
+      const ac=new AbortController(); const t=setTimeout(()=>ac.abort(),12000);
       try{
-        const res=await fetch('https://formspree.io/f/mayajgde', {
-          method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
-          body: JSON.stringify({ name, email, message, _subject:'New portfolio message' })
-        });
+        const res=await fetch('https://formspree.io/f/mayajgde',{ method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body:JSON.stringify({name,email,message,_subject:'New portfolio message'}), signal:ac.signal });
         if(res.ok){ setNote('Message sent — thank you!','success'); showToast('Message sent'); contactForm.reset(); }
-        else{ let d=null; try{ d=await res.json(); }catch{}; setNote(d?.error||'Send failed — check Formspree.','error'); showToast('Send failed'); }
-      }catch(err){ setNote('Network error — try again or email me directly.','error'); showToast('Network error'); }
-      finally{ submitBtn.disabled=false; submitBtn.style.opacity=''; }
+        else{ let d=null; try{ d=await res.json(); }catch{}; setNote(d?.error||'Send failed — try again or email me directly.','error'); showToast('Send failed'); }
+      }catch(err){ setNote(err?.name==='AbortError'?'Timed out — try again or email me directly.':'Network error — try again or email.','error'); showToast('Could not send'); }
+      finally{ clearTimeout(t); submitBtn.disabled=false; submitBtn.classList.remove('opacity-80'); }
     }
     contactForm?.addEventListener('submit', handleContactSubmit);
 
-    /* Footer year */
-    $('#year').textContent = new Date().getFullYear();
+    /* Year */
+    $('#year').textContent=new Date().getFullYear();
+
+    /* Subtle parallax on avatar */
+    (function(){
+      const avatar=$('#heroAvatar'); if(!avatar) return;
+      const onMove=(e)=>{ const r=avatar.getBoundingClientRect(); const dx=(e.clientX-(r.left+r.width/2))/r.width; avatar.style.transform=`translateY(${dx*2}px)`; };
+      window.addEventListener('mousemove', onMove); window.addEventListener('mouseleave', ()=>avatar.style.transform='');
+    })();
   </script>
 </body>
 </html>
