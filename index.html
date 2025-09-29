@@ -1,252 +1,463 @@
-<!DOCTYPE html>
-<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
-<html lang="en" dir="ltr">
-
+<!doctype html>
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <title> Anchita's Portfolio </title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fontawesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anchita Ramani — Portfolio</title>
+  <meta name="description" content="Anchita Ramani — M.S. Computer Science. ML, CV, full-stack prototypes. Open to internships, co-ops, part-time & full-time. Authorized to work in the U.S. — no sponsorship required."/>
+  <script>
+    /* Keep Tailwind simple & consistent */
+    tailwind_config = { darkMode: 'class', theme: { extend: {} }, corePlugins: { preflight: true } }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{ --accent:#4f46e5; --accent-2:#ec4899; --muted:#64748b; }
+    html,body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; margin:0; background:linear-gradient(180deg,#ffffff,#f8fafc); color:#0b1220;}
+    .dark html,.dark body{background:linear-gradient(180deg,#040714,#041022); color:#e6eef8;}
+    :focus{outline:3px solid rgba(79,70,229,0.18); outline-offset:2px;}
+
+    /* Containers: laptop tidy, desktop wide */
+    .container-wide{max-width:1200px; margin-inline:auto; padding-inline:1rem;}
+    @media (min-width:1280px){ .container-wide{ max-width:1400px; } }
+    @media (min-width:1536px){ .container-wide{ max-width:1720px; } }
+
+    /* Header visuals */
+    header.site-header { background: rgba(255,255,255,0.9); }
+    .dark header.site-header { background: linear-gradient(180deg, rgba(6,8,15,0.95), rgba(8,12,20,0.95)); }
+    .avatar-ring{box-shadow:0 12px 30px rgba(2,6,23,0.06); border-radius:18px; overflow:hidden;}
+
+    /* Simple UI atoms */
+    .nav-link{ color:#334155; text-decoration:none; } .dark .nav-link{ color:#cfe0ff; }
+    .nav-outline{ border:1px solid rgba(15,23,42,0.06); padding:.35rem .6rem; border-radius:.5rem; color:#334155; text-decoration:none;}
+    .dark .nav-outline{ border-color: rgba(255,255,255,0.06); color:#cfe0ff; }
+    .icon-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:.5rem; border:1px solid rgba(0,0,0,0.06); background:transparent; text-decoration:none; color:inherit; font-weight:500; }
+    .dark .icon-btn{ border-color: rgba(255,255,255,0.06); }
+    .nav-cta{ background: var(--accent); color:#fff; border-radius:.5rem; padding:.4rem .7rem; font-weight:600; text-decoration:none; }
+    .text-muted{ color:#475569; } .high-contrast{ color:#0b1220 } .dark .high-contrast{ color:#e6eef8 } .dark .text-muted{color: #e2e8f0; }
+    .badge { display:inline-flex; align-items:center; gap:.5rem; border-radius:999px; padding:.45rem .9rem; font-size:.92rem; font-weight:600; }
+    .badge-primary { background: var(--accent); color:#fff; }
+    .badge-secondary { background:#eef2ff; color:#0b1220; } .dark .badge-secondary{ background:#0f1724; color:#e6eef8; }
+    .tag { background:#eef2ff; color:#3730a3; padding:.25rem .6rem; border-radius:999px; font-size:.78rem; display:inline-block; }
+    .dark .tag{ background: rgba(79,70,229,0.25); color:#e0e7ff; }
+
+    /* Cards & progress */
+    .card-hover{background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:18px; transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;}
+    .card-hover:hover{transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,.12);}
+    .dark .card-hover{ background: linear-gradient(180deg,#081122,#071127); border-color: rgba(255,255,255,0.06); }
+    .progress{height:10px; border-radius:999px; background:rgba(226,232,240,0.6); overflow:hidden;}
+    .progress > div{ height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); }
+
+    /* Toast */
+    .toast{position:fixed; right:1rem; bottom:1rem; z-index:60; min-width:180px; background:rgba(15,23,42,0.95); color:#fff; padding:.6rem .9rem; border-radius:.6rem; font-size:.9rem; box-shadow:0 12px 30px rgba(2,6,23,0.3); display:none;}
+    .dark .toast{ background:#111827 }
+
+    /* Modal */
+    .modal-backdrop{ background: rgba(2,6,23,0.72); backdrop-filter: blur(4px); }
+    .modal-card{ background:#fff; } .dark .modal-card{ background: linear-gradient(180deg,#071127,#071127); color:#e6eef8; }
+
+    /* Publications bib */
+    pre.bib{font-family:"Roboto Mono", ui-monospace, Menlo, Monaco, "Courier New", monospace; font-size:.9rem; padding:.6rem; border-radius:.5rem; overflow:auto; background:rgba(15,23,42,.04);}
+    .dark pre.bib{ background: rgba(255,255,255,.05); }
+
+    /* ---------- Form field contrast tweaks (your request) ---------- */
+    input[type="text"], input[type="email"], input[type="url"], textarea{
+      color:#0f172a; caret-color:var(--accent); background:#ffffff; border-color:#cbd5e1;
+    }
+    input::placeholder, textarea::placeholder{ color:#64748b; opacity:1; }
+    .dark input[type="text"], .dark input[type="email"], .dark input[type="url"], .dark textarea{
+      color:#e6eef8; caret-color:#9fb3ff; background:#0b1220; border-color:#334155;
+    }
+    .dark input::placeholder, .dark textarea::placeholder{ color:#94a3b8; opacity:1; }
+    input:focus, textarea:focus{
+      outline: 2px solid rgba(79,70,229,0.35); outline-offset: 2px; border-color:#4f46e5; background:#ffffff;
+    }
+    .dark input:focus, .dark textarea:focus{
+      background:#0f1724; border-color:#818cf8; outline:2px solid rgba(129,140,248,.35);
+    }
+
+    /* Ultra-wide spacing */
+    @media (min-width:1536px){ #projectsGrid{ gap:1.25rem } }
+
+    @media (prefers-reduced-motion: reduce){ .card-hover{transition:none!important; transform:none!important;} }
+
+    /* ===== VISIBILITY HOTFIX (place at end of <style>) ===== */
+
+/* Bump the theme variables so anything using var(--muted) brightens */
+:root { --muted: #475569; }          /* slate-600 (light) */
+.dark :root { --muted: #e2e8f0; }    /* slate-200 (dark) */
+
+/* Force higher-contrast muted text everywhere */
+.text-muted,
+#about .text-muted,
+#projects .text-muted,
+#publications .text-muted,
+#projectModal .text-muted {
+  color: var(--muted) !important;
+}
+
+/* Make skill chips readable in dark mode */
+.tag {
+  background: #eef2ff;
+  color: #3730a3;
+}
+.dark .tag {
+  background: rgba(79,70,229,0.28) !important;  /* indigo tint */
+  color: #e0e7ff !important;                    /* indigo-100 */
+  border-color: transparent !important;
+}
+
+/* Progress labels (often looked washed out) */
+#about .flex.justify-between.text-sm,
+#about .flex.justify-between.text-sm span {
+  color: var(--muted) !important;
+}
+
+/* Publication badges and DOI line */
+#publications .text-muted,
+#publications .inline-block.ml-2 {
+  color: var(--muted) !important;
+}
+
+/* Modal content */
+.modal-card,
+.modal-card .high-contrast { color: inherit !important; }
+.modal-card .text-muted { color: var(--muted) !important; }
+
+  </style>
 </head>
+<body class="antialiased text-slate-900 dark:text-slate-100">
 
-<body>
-    <!-- Move to up button -->
-    <div class="scroll-button">
-        <a href="#home"><i class="fas fa-arrow-up"></i></a>
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite" class="toast"></div>
+
+  <!-- Header -->
+  <header class="site-header sticky top-0 z-50 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800">
+    <div class="container-wide flex items-center justify-between py-3">
+      <a href="#" class="flex items-center gap-3" aria-label="Home">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-400 text-white grid place-items-center font-semibold avatar-ring">AR</div>
+        <div>
+          <div class="text-sm font-semibold high-contrast">Anchita Ramani</div>
+          <div class="text-xs text-muted">M.S. Computer Science • NC State</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-3 text-sm">
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#publications">Publications</a>
+        <a class="nav-outline" href="#contact" aria-label="Contact">Contact</a>
+
+        <a class="icon-btn" href="https://github.com/Anchita15" target="_blank" rel="noopener">GitHub</a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/aramani2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="nav-cta" href="https://drive.google.com" target="_blank" rel="noopener">Resume</a>
+
+        <button id="themeBtn" aria-label="Toggle theme" class="ml-1 p-2 rounded-md border border-slate-200 dark:border-slate-700">
+          <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
+        </button>
+      </nav>
+
+      <!-- Mobile -->
+      <div class="md:hidden flex items-center gap-2">
+        <button id="themeBtnMobile" aria-label="Toggle theme" class="p-2 rounded-md border border-slate-200 dark:border-slate-700">
+          <svg id="themeIconMobile" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
+        </button>
+        <button id="mobileToggle" aria-label="Open menu" class="px-3 py-1 border rounded-md">Menu</button>
+      </div>
     </div>
-    <!-- navgaition menu -->
-    <nav>
-        <div class="navbar">
-            <ul class="menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#services">My Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <div class="cancel-btn">
-                    <i class="fas fa-times"></i>
-                </div>
-            </ul>
-            <div class="media-icons">
-                <!-- <a href="https://www.facebook.com/anchita.ramani/"><i class="fab fa-facebook-f"></i></a> -->
-                <a href="https://github.com/Anchita15"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/anchita-ramani-874277188/"><i class="fab fa-linkedin"></i></a>
-                <!-- <a href="https://www.instagram.com/anchita_ramani/"><i class="fab fa-instagram"></i></a> -->
-            </div>
-        </div>
-        <div class="menu-btn">
-            <i class="fas fa-bars"></i>
-        </div>
-    </nav>
 
-    <!-- Home Section Start -->
-    <section class="home" id="home">
-        <div class="home-content">
-            <div class="text">
-                <div class="text-one">Hello,</div>
-                <div class="text-two">This is Anchita Ramani</div>
-                <div class="text-three">Master's student in Computer Science at NC State.</div>
-                <div class="text-four">From Raleigh, NC</div>
-            </div>
-            <div class="button">
-                <a href="#contact"><button>Hire Me</button></a>
-            </div>
+    <!-- Mobile menu -->
+    <div id="mobilePanel" class="hidden md:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-[rgba(6,8,15,0.95)]">
+      <div class="px-4 py-3 space-y-2">
+        <a class="block text-muted" href="#projects">Projects</a>
+        <a class="block text-muted" href="#about">About</a>
+        <a class="block text-muted" href="#publications">Publications</a>
+        <a class="block text-muted" href="#contact">Contact</a>
+        <div class="flex gap-2 pt-2">
+          <a class="icon-btn" href="https://github.com/Anchita15" target="_blank" rel="noopener">GitHub</a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/aramani2/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="nav-cta" href="https://drive.google.com" target="_blank" rel="noopener">Resume</a>
         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container-wide py-12 relative overflow-x-hidden">
+    <!-- Hero -->
+    <section class="grid md:grid-cols-2 xl:grid-cols-[1.2fr,1fr] gap-8 items-center">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight high-contrast">
+          Hi — I’m <span class="text-indigo-600 dark:text-indigo-300">Anchita</span>. I build ML systems & web apps.
+        </h1>
+        <p class="mt-4 text-lg text-muted">
+          Practical ML & CV: medical imaging, anomaly detection, and deployable prototypes with clean UX.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-3 items-center">
+          <span class="badge badge-primary">Open to internships · co-ops · part-time · full-time</span>
+          <span class="badge badge-secondary">Authorized to work in the U.S. — no sponsorship required</span>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="inline-flex items-center px-4 py-2 rounded-md bg-indigo-600 text-white" href="#projects">View projects</a>
+          <a class="inline-flex items-center px-4 py-2 rounded-md border text-muted" href="#contact">Get in touch</a>
+          <a class="inline-flex items-center px-4 py-2 rounded-md border text-muted" href="mailto:anchitaram@gmail.com">Email</a>
+        </div>
+
+        <div class="mt-6 text-sm text-muted">Based in Raleigh, NC • willing to relocate / remote friendly</div>
+      </div>
+
+      <div class="flex justify-center md:justify-end">
+        <div id="heroAvatar" class="w-60 h-60 avatar-ring bg-slate-100 dark:bg-slate-900/40 rounded-2xl overflow-hidden transform-gpu transition-transform duration-400 hover:scale-[1.02]">
+          <img src="WhatsApp%20Image%202023-08-26%20at%207.19.00%20PM.jpeg" alt="Anchita Ramani" class="object-cover w-full h-full" loading="lazy"/>
+        </div>
+      </div>
     </section>
 
-    <!-- About Section Start -->
-    <section class="about" id="about">
-        <div class="content">
-            <div class="title"><span>About Me</span></div>
-            <div class="about-details">
-                <div class="left">
-                    <img src="WhatsApp Image 2023-08-26 at 7.19.00 PM.jpeg" alt="" height="300px" width="300px">
-                </div>
-                <div class="right">
-                    <div class="topic">Coding Is My Passion</div>
-                    <p>I’m Anchita Ramani, a Master of Computer Science student at North Carolina State University, graduating in May 2026. With a strong foundation in full-stack development and applied machine learning, I bring a research-driven and solution-oriented approach to solving real-world problems.
-
-Born in Indianapolis and raised in India, I completed my B.Tech in Computer Science from Sikkim Manipal Institute of Technology. I later gained hands-on research experience at the Birla Institute of Technology, Mesra, where I worked on deep learning projects in medical imaging and computer vision, including pneumonia detection and driver drowsiness detection systems using CNNs and transfer learning. These efforts led to multiple publications in international conferences and journals.
-
-My technical journey began with web development in my first year of undergrad, and over time, expanded into machine learning, data science, and neural networks. At NC State, I’ve continued to deepen my skills through advanced coursework and collaborative projects.
-
-I’ve also held leadership roles, including serving as Vice President of my undergraduate tech club, where I organized hackathons and technical workshops. I’m passionate about developing scalable, impactful applications and am actively seeking opportunities in web development, AI/ML, and data-driven innovation.
-                        <div class="button">
-                            <a href="https://drive.google.com/file/d/1Px2JcpmiVGA4khvjMvLm_MOV-a2MYGPF/view?usp=sharing" target="_blank"><button>Download RESUME</button></a>
-                        </div>
-                </div>
-            </div>
-        </div>
+    <!-- Projects -->
+    <section id="projects" class="mt-12">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl font-semibold high-contrast">Selected projects</h2>
+        <p class="text-sm text-muted">Click a card to view code / demo.</p>
+      </div>
+      <div id="projectsGrid" class="mt-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"></div>
     </section>
 
-    <!-- My Skill Section Start -->
-    <!-- Section Tag and Other Div will same where we need to put same CSS -->
-    <section class="skills" id="skills">
-        <div class="content">
-            <div class="title"><span>My Skills</span></div>
-            <div class="skills-details">
-                <div class="text">
-                    <div class="topic">Technical Proficiencies</div>
-<p>&#x2794 Proficient in Python, JavaScript (ES6+), C++, and SQL</p>
-<p>&#x2794 Strong grasp of data structures, algorithms, and object-oriented design principles</p>
-<p>&#x2794 Experienced in full-stack web development using React, Django, HTML5, CSS3, and RESTful APIs</p>
-<p>&#x2794 Skilled in machine learning model development and deployment using TensorFlow, PyTorch, scikit-learn, and Pandas</p>
-<p>&#x2794 Familiar with version control (Git), collaborative workflows (GitHub), and agile development practices</p>
-<p>&#x2794 Adept at writing clean, maintainable, and efficient code with a focus on performance and scalability</p>
-<p>&#x2794 Strong communication skills; able to translate complex technical ideas for both technical and non-technical audiences</p>
+    <!-- About & Skills -->
+    <section id="about" class="mt-12 grid md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-2xl font-semibold high-contrast">About me</h2>
+        <p class="mt-3 text-muted">
+          I build end-to-end ML systems — from data ingestion and modeling to production-ready deployment.
+          I enjoy working on medical imaging, anomaly detection, and shipping reproducible prototypes.
+        </p>
+        <ul class="mt-4 text-sm space-y-1 text-muted">
+          <li>• Master’s in Computer Science — NC State (expected May 2026)</li>
+          <li>• Research: medical imaging & anomaly detection</li>
+          <li>• Deployment: Streamlit, FastAPI/Flask, Docker, CI/CD</li>
+        </ul>
+      </div>
 
-                    <div class="experience">
-                        <div class="num">1</div>
-                        <div class="exp">Year Of <br> Experience</div>
-                    </div>
-                </div>
-                <div class="boxes">
-                    <div class="box">
-                        <div class="topic">HTML&CSS</div>
-                        <style>
-                            .checked {
-                                color: #201b49;
-                            }
-                        </style>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                    </div>
-                    <div class="box">
-                        <div class="topic">PYTHON</div>
-                        <style>
-                            .checked {
-                                color: #201b49;
-                            }
-                        </style>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                    </div>
-                    <div class="box">
-                        <div class="topic">JavScript</div>
-                        <style>
-                            .checked {
-                                color: #201b49;
-                            }
-                        </style>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <div class="box">
-                        <div class="topic">C++</div>
-                        <style>
-                            .checked {
-                                color: #0A66C2;
-                            }
-                        </style>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                </div>
-            </div>
+      <div>
+        <h3 class="text-lg font-medium high-contrast">Skills</h3>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="tag">SQL</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Google Cloud</span>
+          <span class="tag">Git</span><span class="tag">TensorFlow</span><span class="tag">CI/CD</span>
+          <span class="tag">PyTorch</span><span class="tag">Docker</span>
         </div>
+
+        <div class="mt-6 space-y-4">
+          <div>
+            <div class="flex justify-between text-sm text-muted"><span>Python</span><span>90%</span></div>
+            <div class="progress mt-2"><div style="width:90%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm text-muted"><span>SQL</span><span>85%</span></div>
+            <div class="progress mt-2"><div style="width:85%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm text-muted"><span>TensorFlow / PyTorch</span><span>80%</span></div>
+            <div class="progress mt-2"><div style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- My Services Section Start -->
-    <section class="services" id="services">
-        <div class="content">
-            <div class="title"><span>My Services</span></div>
-            <div class="boxes">
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Web Devlopment</div>
-                    <p>Proficient in front-end development, I specialize in building responsive, accessible, and user-friendly web interfaces. I work with modern technologies including HTML5, CSS3, JavaScript (ES6+), and React for dynamic and interactive UI development. I also have experience integrating front-end components with back-end services using Django, enabling full-stack functionality and scalable web solutions.
-</p>
-                </div>
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Machine Learning</div>
-                    <p>Skilled in designing, training, and deploying machine learning models, I use Python along with frameworks like TensorFlow and PyTorch to develop data-driven solutions for classification, regression, and computer vision tasks. My experience includes preprocessing large datasets, implementing deep learning architectures (CNNs, MLPs), hyperparameter tuning, model evaluation, and deploying models into production-ready pipelines.
-
-</p>
-                </div>
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Data Analysis</div>
-                    <p>Experienced in data collection, cleaning, and analysis using tools like Pandas, NumPy, and SQL, I provide actionable insights to drive business decisions.
-                    </p>
-                </div>
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Version Control with Git</div>
-                    <p>
-                        Ensuring code quality and collaboration through effective use of Git and GitHub for version control and project management.
-
-                    </p>
-                </div>
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Software Development</div>
-                    <p>Developing robust software applications with a strong understanding of algorithms, data structures, and object-oriented programming in languages like Java and C++.</p>
-                </div>
-                <div class="box">
-                    <div class="icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="topic">Research and Development</div>
-                    <p>Conducting research and implementing cutting-edge solutions in the Deep Learning domain, backed by my experience at the Birla Institute of Technology, Mesra.</p>
-                </div>
-            </div>
-        </div>
+    <!-- Publications -->
+    <section id="publications" class="mt-12 max-w-4xl">
+      <h2 class="text-2xl font-semibold high-contrast">Publications</h2>
+      <p class="mt-2 text-muted">Selected peer-reviewed publications.</p>
+      <div id="publicationsList" class="mt-6 space-y-4"></div>
     </section>
 
+    <!-- Contact -->
+    <section id="contact" class="mt-12 max-w-3xl">
+      <h2 class="text-2xl font-semibold high-contrast">Contact</h2>
+      <p class="mt-2 text-muted">Interested in working together? Send a quick message — I typically reply within a few business days.</p>
 
-    <!-- Contact Me section Start -->
-    <section class="contact" id="contact">
-        <div class="content">
-            <div class="title"><span>Contact Me</span></div>
-            <div class="text">
-                <div class="topic">Have Any Project?</div>
-                <p>Ping me and lets discuss.</p><br>
-                <form class="form" action="https://formspree.io/f/mayajgde" method="POST">
-                    <label style="font-size: 25px;" for="email">Your Email</label><br>
-                    <input name="Email" id="email" type="email" placeholder="Your Email"><br><br>
-                    <label style="font-size: 25px;" for="text-area">Your Message</label><br>
-                    <textarea id="textarea" rows="6" name="message" placeholder="Your message."></textarea><br><br>
-                    <button id="button" type="submit">Send</button>
-                </form>
-            </div>
+      <form id="contactForm" class="mt-6 grid gap-3" novalidate>
+        <label class="sr-only" for="name">Name</label>
+        <input id="name" name="name" required placeholder="Your name"
+               class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"/>
+
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" name="email" required type="email" placeholder="you@example.com"
+               class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"/>
+
+        <label class="sr-only" for="message">Message</label>
+        <textarea id="message" name="message" required rows="5" placeholder="Short message"
+                  class="px-4 py-3 border rounded-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"></textarea>
+
+        <div class="flex gap-3 items-center">
+          <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-indigo-600 text-white">Send</button>
+          <a href="mailto:anchitaram@gmail.com" class="px-4 py-2 rounded-md border text-muted">Email</a>
         </div>
+
+        <div id="contactNote" class="text-sm mt-1 text-muted">
+          Your message will be sent via Formspree to <b>anchitaram@gmail.com</b>.
         </div>
-        </div>
+      </form>
     </section>
 
-    <!-- Footer Section Start -->
-    <footer>
-        <div class="text">
-            <span>Created By <a href="#">Anchita Ramani</a> | &#169; 2023</span>
-        </div>
+    <footer class="mt-12 border-t border-slate-100 dark:border-slate-800 pt-6 text-sm text-muted">
+      © <span id="year"></span> Anchita Ramani — Built with care.
     </footer>
+  </main>
 
-    <script src="script.js"></script>
+  <!-- Project modal -->
+  <div id="projectModal" class="fixed inset-0 hidden items-center justify-center z-50" aria-hidden="true" role="dialog" aria-modal="true">
+    <div id="modalBackdrop" class="modal-backdrop absolute inset-0"></div>
+    <div class="relative max-w-3xl w-full mx-4 bg-white dark:bg-[#071127] rounded-2xl shadow-xl overflow-hidden modal-card">
+      <div class="p-6">
+        <button id="modalClose" class="absolute right-4 top-4 p-2 rounded-md border border-slate-200 dark:border-slate-700 high-contrast" aria-label="Close project (Esc)">&times;</button>
+        <h3 id="modalTitle" class="text-xl font-semibold high-contrast"></h3>
+        <p id="modalDesc" class="mt-3 text-muted"></p>
+        <div id="modalTech" class="mt-4 flex flex-wrap gap-2"></div>
+        <div class="mt-6 flex gap-3">
+          <a id="modalDemo" class="inline-block px-4 py-2 rounded-md border text-muted" target="_blank" rel="noopener">View demo</a>
+          <a id="modalCode" class="inline-block px-4 py-2 rounded-md bg-indigo-600 text-white" target="_blank" rel="noopener">Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ===== Utilities ===== */
+    const $=(s,el=document)=>el.querySelector(s); const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+    const toastEl = $('#toast'); const showToast=(m,t=2500)=>{ if(!toastEl) return; toastEl.textContent=m; toastEl.style.display='block'; clearTimeout(toastEl._t); toastEl._t=setTimeout(()=>toastEl.style.display='none',t); };
+
+    /* Theme */
+    const THEME_KEY='site-theme', htmlEl=document.documentElement;
+    const icon=$('#themeIcon'), iconM=$('#themeIconMobile');
+    const sunSVG='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1M12 20v1M4.2 4.2l.7.7M18.1 18.1l.7.7M1 12h1M22 12h1M4.2 19.8l.7-.7M18.1 5.9l.7-.7M12 7a5 5 0 100 10 5 5 0 000-10z"/>';
+    const moonSVG='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+    function setTheme(mode){ htmlEl.classList.toggle('dark', mode==='dark'); if(icon) icon.innerHTML=mode==='dark'?sunSVG:moonSVG; if(iconM) iconM.innerHTML=mode==='dark'?sunSVG:moonSVG; }
+    (function initTheme(){ const saved=localStorage.getItem(THEME_KEY); if(saved==='light'||saved==='dark'){ setTheme(saved); } else { setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }})();
+    function toggleTheme(){ const dark=htmlEl.classList.contains('dark'); const next=dark?'light':'dark'; localStorage.setItem(THEME_KEY,next); setTheme(next); showToast(`Switched to ${next} mode`);}
+    $('#themeBtn')?.addEventListener('click', toggleTheme); $('#themeBtnMobile')?.addEventListener('click', toggleTheme);
+
+    /* Mobile menu */
+    $('#mobileToggle')?.addEventListener('click', ()=> $('#mobilePanel').classList.toggle('hidden'));
+
+    /* Hero parallax (subtle) */
+    (function heroParallax(){
+      const avatar = $('#heroAvatar'); if(!avatar) return;
+      let range = 9;
+      function handle(e){
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const r = avatar.getBoundingClientRect(); const cx=r.left+r.width/2; const dx=(e.clientX-cx)/r.width;
+        avatar.style.transform = `translate3d(${dx*range}px, ${dx*0.2}px, 0) rotate(${dx*1.6}deg)`;
+      }
+      window.addEventListener('mousemove', handle);
+      window.addEventListener('mouseleave', ()=> avatar.style.transform='');
+    })();
+
+    /* Projects (your 3) */
+    const projects=[
+      { id:'proj-hpp', title:'House Price Prediction System', desc:'Regression pipeline with feature engineering, XGBoost baseline, and a Streamlit UI for interactive predictions.', tech:['Python','Pandas','XGBoost','Streamlit','CI/CD'], img:'my_portfolio\assets\Capture.png', demo:'https://housepricepredictionmlpp-jkpeappl7mkxhhkq4hnyxyf.streamlit.app/', code:'https://github.com/Anchita15/house_price_prediction_ML_pp' },
+      { id:'proj-pneumo', title:'Pneumonia Detection System', desc:'PneumonXNet — CNN for chest X-rays with preprocessing, eval dashboard, and inference API.', tech:['TensorFlow','Keras','OpenCV','Python','Docker'], img:'', demo:'#', code:'https://github.com/Anchita15' },
+      { id:'proj-anomaly', title:'Anomaly Detection System', desc:'Unsupervised anomalies with autoencoders & Isolation Forest; real-time scoring via FastAPI.', tech:['PyTorch','scikit-learn','FastAPI','Python','Docker'], img:'', demo:'#', code:'https://github.com/Anchita15' }
+    ];
+    const grid=$('#projectsGrid');
+    function card(p){
+      const a=document.createElement('article'); a.className='card-hover p-4 border border-slate-100 dark:border-slate-800';
+      a.innerHTML=`
+        <div class="h-40 rounded-md bg-slate-50 dark:bg-slate-900/40 grid place-items-center text-slate-400 dark:text-slate-300 overflow-hidden">
+          ${p.img?`<img src="${p.img}" alt="${p.title} screenshot" class="object-cover w-full h-full" loading="lazy">`:'<span class="text-sm text-muted">Screenshot</span>'}
+        </div>
+        <h3 class="mt-3 font-semibold high-contrast">${p.title}</h3>
+        <p class="mt-2 text-sm text-muted">${p.desc}</p>
+        <div class="mt-3 flex flex-wrap gap-2">${p.tech.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="mt-4 flex gap-2">
+          <button class="px-3 py-1 border rounded-md" data-view="${p.id}">View</button>
+          <a class="px-3 py-1 rounded-md bg-indigo-600 text-white" href="${p.code}" target="_blank" rel="noopener">Code</a>
+        </div>`;
+      a.querySelector('[data-view]')?.addEventListener('click', ()=>openProjectModal(p.id));
+      a.tabIndex=0; a.setAttribute('role','button');
+      a.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openProjectModal(p.id);} });
+      return a;
+    }
+    function render(){ if(!grid) return; grid.innerHTML=''; projects.forEach(p=>grid.appendChild(card(p))); }
+    render();
+
+    /* Modal */
+    const modal=$('#projectModal'), mTitle=$('#modalTitle'), mDesc=$('#modalDesc'), mTech=$('#modalTech'), mDemo=$('#modalDemo'), mCode=$('#modalCode');
+    function openProjectModal(id){ const p=projects.find(x=>x.id===id); if(!p) return;
+      mTitle.textContent=p.title; mDesc.textContent=p.desc; mTech.innerHTML=p.tech.map(t=>`<span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-sm mr-1">${t}</span>`).join('');
+      mDemo.href=p.demo||'#'; mCode.href=p.code||'#'; modal.style.display='flex'; modal.removeAttribute('aria-hidden'); document.body.style.overflow='hidden';
+    }
+    function closeProjectModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    $('#modalClose')?.addEventListener('click', closeProjectModal); $('#modalBackdrop')?.addEventListener('click', closeProjectModal);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.style.display==='flex') closeProjectModal(); });
+
+    /* Publications */
+    const publications=[
+      { id:'pub1', title:'PneumonXNet - A Deep Learning Model for Pneumonia Detection', authors:'Harshit Aditya, Anchita Ramani, Nilesh Kumar, Kasturi Singh, Vandana Bhattacharjee', venue:'SPARC 2024 · IEEE', doi:'10.1109/SPARC61891.2024.10829021', bib:`@inproceedings{aditya2024pneumonxnet,
+  title={PneumonXNet - A Deep Learning Model for Pneumonia Detection},
+  author={Aditya, Harshit and Ramani, Anchita and Kumar, Nilesh and Singh, Kasturi and Bhattacharjee, Vandana},
+  booktitle={2024 International Conference on Signal Processing and Advance Research in Computing (SPARC)},
+  year={2024},
+  publisher={IEEE},
+  doi={10.1109/SPARC61891.2024.10829021}
+}` },
+      { id:'pub2', title:'DDConvNet: A Deep Learning Approach for Driver Drowsiness Detection', authors:'Nilesh Kumar, Kasturi Singh, Anchita Ramani, Harshit Aditya, Vandana Bhattacharjee, Sayantani Roy', venue:'AIP Conf. Proc. 2025', doi:'10.1063/5.0248451', bib:`@article{kumar2025ddconvnet,
+  title={DDConvNet: A Deep Learning Approach for Driver Drowsiness Detection},
+  author={Kumar, Nilesh and Singh, Kasturi and Ramani, Anchita and Aditya, Harshit and Bhattacharjee, Vandana and Roy, Sayantani},
+  journal={AIP Conference Proceedings},
+  volume={3253},
+  pages={030025},
+  year={2025},
+  doi={10.1063/5.0248451}
+}` }
+    ];
+    const pubList=$('#publicationsList');
+    const esc=(s)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    function pubCard(p){ const el=document.createElement('article'); el.className='card-hover p-4 border border-slate-100 dark:border-slate-800';
+      el.innerHTML=`<h3 class="font-semibold high-contrast">${p.title}</h3>
+      <p class="mt-1 text-sm text-muted">${p.authors} <span class="inline-block ml-2 text-xs px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-200">${p.venue}</span></p>
+      <p class="mt-2 text-sm text-muted">DOI: <a class="text-indigo-600 dark:text-indigo-300 underline" href="https://doi.org/${p.doi}" target="_blank" rel="noopener">${p.doi}</a></p>
+      <div class="mt-3">
+        <div class="flex items-center gap-2">
+          <button class="copy-bib px-3 py-1 rounded-md border text-sm" data-id="${p.id}">Copy BibTeX</button>
+          <button class="toggle-bib px-3 py-1 rounded-md border text-sm" data-id="${p.id}" aria-expanded="false">Show BibTeX</button>
+          <span id="copied-${p.id}" class="ml-2 text-sm text-green-600 dark:text-green-200 hidden">Copied ✓</span>
+        </div>
+        <div id="bib-${p.id}" class="mt-3 hidden"><pre class="bib">${esc(p.bib)}</pre></div>
+      </div>`;
+      el.querySelector('.copy-bib').addEventListener('click',()=>copyBib(p.id));
+      el.querySelector('.toggle-bib').addEventListener('click',(e)=>toggleBib(p.id,e.currentTarget));
+      return el;
+    }
+    function renderPubs(){ if(!pubList) return; pubList.innerHTML=''; publications.forEach(p=>pubList.appendChild(pubCard(p))); }
+    renderPubs();
+    async function copyBib(id){ const p=publications.find(x=>x.id===id); if(!p) return; try{ await navigator.clipboard.writeText(p.bib); const el=$(`#copied-${id}`); el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),1600); showToast('BibTeX copied'); } catch { showToast('Copy failed — select manually'); } }
+    function toggleBib(id,btn){ const blk=$(`#bib-${id}`); const show=blk.classList.contains('hidden'); blk.classList.toggle('hidden',!show); btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide BibTeX':'Show BibTeX'; }
+
+    /* Contact (Formspree) — your real endpoint */
+    const contactForm=$('#contactForm'), submitBtn=$('#submitBtn'), note=$('#contactNote');
+    function setNote(m,k='info'){ if(!note) return; note.textContent=m; note.style.color = k==='error' ? '#f87171' : k==='success' ? '#22c55e' : ''; }
+    async function handleContactSubmit(e){
+      e.preventDefault();
+      const name=$('#name').value.trim(), email=$('#email').value.trim(), message=$('#message').value.trim();
+      if(!name||!email||!message){ setNote('Please fill all fields.','error'); showToast('Please fill all fields.'); return; }
+      submitBtn.disabled=true; submitBtn.style.opacity='.7';
+      try{
+        const res=await fetch('https://formspree.io/f/mayajgde', {
+          method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
+          body: JSON.stringify({ name, email, message, _subject:'New portfolio message' })
+        });
+        if(res.ok){ setNote('Message sent — thank you!','success'); showToast('Message sent'); contactForm.reset(); }
+        else{ let d=null; try{ d=await res.json(); }catch{}; setNote(d?.error||'Send failed — check Formspree.','error'); showToast('Send failed'); }
+      }catch(err){ setNote('Network error — try again or email me directly.','error'); showToast('Network error'); }
+      finally{ submitBtn.disabled=false; submitBtn.style.opacity=''; }
+    }
+    contactForm?.addEventListener('submit', handleContactSubmit);
+
+    /* Footer year */
+    $('#year').textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
