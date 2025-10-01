@@ -59,7 +59,7 @@
     .icon-btn:hover{ background:color-mix(in oklab, var(--line), transparent 70%); }
 
     /* Sections */
-    section{ padding-block:56px; }
+    section{ padding-block:20px; }
     .section-head{ display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:18px; }
     .eyebrow{ font-weight:700; letter-spacing:.05em; font-size:.8rem; color:var(--brand); text-transform:uppercase; }
     .h1{ font-size:clamp(28px,3.2vw,42px); line-height:1.15; font-weight:800; }
@@ -97,12 +97,37 @@
     .field:focus{ outline:2px solid color-mix(in oklab,var(--brand), transparent 70%); border-color:color-mix(in oklab,var(--brand), transparent 50%); }
 
     /* Small helpers */
-    .divider{ height:1px; background:var(--line); margin-top:28px; }
-    .toast{ position:fixed; right:1rem; bottom:1rem; z-index:70; background:#0f172a; color:#fff; padding:.6rem .8rem; border-radius:10px; display:none; }
+      .divider{  height: 1px;
+    background: color-mix(in oklab, var(--line), transparent 60%); /* lighter line */
+    margin: 60px 0;  /* bigger gap above/below divider */ }
 
     /* Reveal on scroll */
     .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
     .reveal.show{ opacity:1; transform:none; }
+
+    /* Small floaty avatar */
+      #heroAvatar {
+    width: 380px;   /* adjust as you like */
+    height: 460px;  /* keep aspect ratio close to your picture */
+    border-radius: 0;   /* removes circle / oval — full rectangle */
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(2,6,23,0.18);
+  }
+
+  #heroAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
   </style>
 </head>
 
@@ -159,8 +184,8 @@
   <main>
     <!-- HERO -->
     <section class="wrap pt-16">
-      <div class="grid md:grid-cols-[1.2fr,1fr] gap-10 items-start">
-        <div class="reveal">
+      <div class="grid md:grid-cols-[1.4fr,0.9fr] gap-12 items-center">
+        <div class="reveal space-y-5">
           <p class="eyebrow">Machine Learning • Web Systems</p>
           <h1 class="h1 mt-2">Hi! I’m <span class="text-indigo-600 dark:text-indigo-300">Anchita, </span> I build practical ML systems and clean web apps.</h1>
           <p class="muted mt-4 text-lg">Focus areas: medical imaging, anomaly detection, and deployable prototypes with thoughtful UX.</p>
@@ -179,13 +204,19 @@
           <div class="muted mt-4 text-sm">Based in Raleigh, NC • open to relocate • remote friendly</div>
         </div>
 
-        <div class="reveal">
-          <div id="heroAvatar" class="rounded-2xl overflow-hidden border" style="border-color:var(--line)">
-            <img src="WhatsApp%20Image%202023-08-26%20at%207.19.00%20PM.jpeg" alt="Anchita Ramani" class="block w-full h-full object-cover">
+        <div class="reveal flex justify-center md:justify-end">
+          <div class="reveal flex justify-center md:justify-end">
+            <div id="heroAvatar" class="overflow-hidden border shadow-lg" style="border-color:var(--line); width:380px; height:460px;">
+              <img src="WhatsApp%20Image%202023-08-26%20at%207.19.00%20PM.jpeg" alt="Anchita Ramani" class="block w-full h-full object-cover">
+            </div>
           </div>
+
+
+
         </div>
+
       </div>
-      <div class="wrap divider"></div>
+      <div class="wrap divider mb-16"></div>
     </section>
 
     <!-- PROJECTS -->
